@@ -9,11 +9,13 @@ import { createClient } from "redis";
 import { createAdapter } from "@socket.io/redis-adapter";
 import "express-async-errors";
 import compression from "compression";
-import { config } from "./config";
-import applicationRoutes from "./routes";
+import { config } from "@root/config";
+import applicationRoutes from "@root/routes";
 import HTTP_STATUS from "http-status-codes";
-import { CustomError, IErrorResponse } from "./shared/globals/helpers/error-handler";
+
 import Logger from "bunyan";
+import { CustomError, IErrorResponse } from "@global/helpers/error-handler";
+import bodyParser from "body-parser";
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger("Server");
@@ -29,6 +31,7 @@ export class ChattyServer {
     this.globalErrorHandler(this.app);
     this.startServer(this.app);
     this.apiMonitoring(this.app);
+    console.log("start");
   }
   private securityMiddleware(app: Application): void {
     app.use(
@@ -54,6 +57,7 @@ export class ChattyServer {
     app.use(compression());
     app.use(json({ limit: "50mb" }));
     app.use(urlencoded({ extended: true, limit: "50mb" }));
+    app.use(bodyParser.urlencoded({ extended: true }));
   }
   private routeMiddleware(app: Application): void {
     applicationRoutes(app);
@@ -104,5 +108,7 @@ export class ChattyServer {
     });
   }
 
-  private socketIOConnections(io: Server): void {}
+  private socketIOConnections(io: Server): void {
+    log.info("socketIOConnections");
+  }
 }
