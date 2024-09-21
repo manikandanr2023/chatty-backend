@@ -38,6 +38,7 @@ export class SignIn {
     const userDocument: IUserDocument = {
       ...user,
       authId: existingUser!._id,
+      
       username: existingUser!.username,
       email: existingUser!.email,
       avatarColor: existingUser!.avatarColor,
