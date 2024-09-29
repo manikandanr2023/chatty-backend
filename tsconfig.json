@@ -33,7 +33,11 @@
       "@global/*":["src/shared/globals/*"],
       "@service/*":["src/shared/services/*"],
       "@socket/*":["src/shared/sockets/*"],
+<<<<<<< HEAD
       "@workers/*":["src/shared/worker/*"],
+=======
+      "@workers/*":["src/shared/workers/*"],
+>>>>>>> 2fbf8b2 (feat: implemented password reset feature with unit test)
       "@root/*":["src/*"]
 
     }

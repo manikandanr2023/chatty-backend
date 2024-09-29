@@ -23,7 +23,11 @@ withCredentials:true
 
 {
   "username":"mani2118",
+<<<<<<< HEAD
   "password":"mani1"
+=======
+  "password":"qwerty1"
+>>>>>>> 2fbf8b2 (feat: implemented password reset feature with unit test)
 }
 
 
@@ -33,3 +37,29 @@ Content-Type: application/json
 Accept: application/json
 withCredentials:true
 
+<<<<<<< HEAD
+=======
+
+###
+Post {{baseUrl}}/{{urlPath}}/forgot-password
+Content-Type: application/json
+Accept:application/json
+withCredentials:true
+
+{
+ "email":"test222118@gmail.com"
+
+}
+
+###
+Post {{baseUrl}}/{{urlPath}}/reset-password/454e9c164bc1a0b03465a7ae3d1954b674fa3ee2
+Content-Type: application/json
+Accept:application/json
+withCredentials:true
+
+{
+"password":"qwerty1",
+"confirmPassword":"qwerty1"
+
+}
+>>>>>>> 2fbf8b2 (feat: implemented password reset feature with unit test)

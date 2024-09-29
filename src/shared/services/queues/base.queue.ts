@@ -5,9 +5,15 @@ import { BullAdapter } from "@bull-board/api/bullAdapter";
 import { config } from "@root/config";
 import { ExpressAdapter } from "@bull-board/express";
 import { IAuthJob } from "@auth/interfaces/auth.interface";
+<<<<<<< HEAD
 import { IUserJob } from "@user/interfaces/user.interface";
 
 type IBaseJobData = IAuthJob | IUserJob;
+=======
+import { IEmailJob, IUserJob } from "@user/interfaces/user.interface";
+
+type IBaseJobData = IAuthJob | IUserJob | IEmailJob;
+>>>>>>> 2fbf8b2 (feat: implemented password reset feature with unit test)
 let bullAdapters: BullAdapter[] = [];
 export let serverAdapter: ExpressAdapter;
 export abstract class BaseQueue {

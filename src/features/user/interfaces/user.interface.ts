@@ -27,7 +27,11 @@ export interface IUserDocument extends Document {
 export interface IResetPasswordParams {
   username: string;
   email: string;
+<<<<<<< HEAD
   ipadress: string;
+=======
+  ipaddress: string;
+>>>>>>> 2fbf8b2 (feat: implemented password reset feature with unit test)
   date: string;
 }
 export interface INotificationSettings {
