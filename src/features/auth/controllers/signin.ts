@@ -29,11 +29,6 @@ export class SignIn {
     }
 
     const user: IUserDocument = await userService.getUserByAuthId(`${existingUser._id}`);
-<<<<<<< HEAD
-    console.log(user);
-=======
-
->>>>>>> 2fbf8b2 (feat: implemented password reset feature with unit test)
     const userJwt: string = JWT.sign(
       {
         userId: user._id,
@@ -44,8 +39,6 @@ export class SignIn {
       },
       config.JWT_TOKEN!
     );
-<<<<<<< HEAD
-=======
     await mailTransport.sendEmail(
       "angelo1@ethereal.email",
       "Testing development email",
@@ -63,16 +56,10 @@ export class SignIn {
       receiverEmail: "angelo1@ethereal.email",
       subject: "Password reset Confirmation"
     });
->>>>>>> 2fbf8b2 (feat: implemented password reset feature with unit test)
     req.session = { jwt: userJwt };
     const userDocument: IUserDocument = {
       ...user,
       authId: existingUser!._id,
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 2fbf8b2 (feat: implemented password reset feature with unit test)
       username: existingUser!.username,
       email: existingUser!.email,
       avatarColor: existingUser!.avatarColor,
