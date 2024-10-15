@@ -1,8 +1,9 @@
-import { authMiddleware } from "./features/auth/interfaces/auth-middleware";
+import { authMiddleware } from "./shared/globals/helpers/auth-middleware";
 import { currentUserRoutes } from "@auth/routes/currentRoutes";
 import { authRoutes } from "@auth/routes/authRoutes";
 import { serverAdapter } from "@service/queues/base.queue";
 import { Application } from "express";
+import { postRoutes } from "@post/routes/postRoutes";
 const BASE_PATH = "/api/v1";
 export default (app: Application) => {
   const routes = () => {
@@ -10,6 +11,7 @@ export default (app: Application) => {
     app.use(BASE_PATH, authRoutes.routes());
     app.use(BASE_PATH, authRoutes.signOutRoute());
     app.use(BASE_PATH, authMiddleware.verifyUser, currentUserRoutes.routes());
+    app.use(BASE_PATH, authMiddleware.verifyUser, postRoutes.routes());
   };
   routes();
 };
