@@ -39,13 +39,13 @@ withCredentials:true
 
 
 ###
-POST    {{baseUrl}}/{{urlPath}}/post/
+POST {{baseUrl}}/{{urlPath}}/post/
 Content-Type: application/json
 Accept: application/json
 withCredentials:true
 
 {
-"post":"This is my post 121",
+"post":"This is my post 123",
 "bgColor":"orange",
 "privacy":"Public",
 "gifUrl":"",
