@@ -29,6 +29,7 @@ const config: Config.InitialOptions = {
     "@service/(.*)": ["<rootDir>/src/shared/services/$1"],
     "@socket/(.*)": ["<rootDir>/src/shared/sockets/$1"],
     "@worker/(.*)": ["<rootDir>/src/shared/workers/$1"],
+    "@reaction/(.*)": ["<rootDir>/src/features/reactions/$1"],
     "@root/(.*)": ["<rootDir>/src/$1"]
   }
 };

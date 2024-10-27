@@ -9,7 +9,6 @@ class UserWorker {
     try {
       const { value } = job.data;
       await userService.addUserData(value);
-      console.log(userService);
       job.progress(100);
       done(null, job.data);
     } catch (error) {

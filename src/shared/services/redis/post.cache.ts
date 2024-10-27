@@ -5,7 +5,7 @@ import { ServerError } from "@global/helpers/error-handler";
 import { IPostDocument, ISavePostToCache } from "@post/interfaces/post.interface";
 import { Helpers } from "@global/helpers/helpers";
 import { RedisCommandRawReply } from "@redis/client/dist/lib/commands";
-import { IReactions } from "@reactions/interfaces/reaction.interface";
+import { IReactions } from "@reaction/interfaces/reaction.interface";
 const log: Logger = config.createLogger("postCache");
 
 export type PostCacheMultiType = string | number | Buffer | RedisCommandRawReply[] | IPostDocument | IPostDocument[];
@@ -68,6 +68,7 @@ export class PostCache extends BaseCache {
       const count: number = parseInt(postCount[0], 10) + 1;
       multi.HSET(`users:${currentUserId}`, "postsCount", count);
       multi.exec();
+      console.log("Current User" + currentUserId);
       console.log("post done");
     } catch (error) {
       log.error(error);
