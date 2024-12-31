@@ -1,0 +1,107 @@
+@baseUrl = http://localhost:5000
+@urlPath=api/v1
+
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/all/1
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{}
+
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/67547dc12ee3a765669db48a
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/posts/Mani2/67547cd3c8c9603c480857f6/231620787325
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{}
+
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/user/suggestions
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{}
+
+
+###
+GET {{baseUrl}}/{{urlPath}}/user/profile/search/ai
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{}
+
+
+###
+PUT  {{baseUrl}}/{{urlPath}}/user/profile/change-password
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{
+  "currentPassword":"mani1",
+  "newPassword":"mani11",
+  "confirmPassword":"mani11"
+}
+
+###
+PUT  {{baseUrl}}/{{urlPath}}/user/profile/basic-info
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{
+  "quote":"testing",
+  "work":"testing",
+  "school":"testing",
+  "location":"testing"
+}
+
+###
+PUT  {{baseUrl}}/{{urlPath}}/user/profile/social-links
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{
+  "instagram":"",
+  "twitter":"",
+  "facebook":"",
+  "youtube":"testing"
+}
+
+
+###
+PUT  {{baseUrl}}/{{urlPath}}/user/profile/settings
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{
+  "messages":false,
+  "reactions":true,
+  "comments":false,
+  "follows":true
+}
