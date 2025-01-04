@@ -10,7 +10,7 @@ import { UploadApiResponse } from "cloudinary";
 import { BadRequestError } from "@global/helpers/error-handler";
 
 const postCache: PostCache = new PostCache();
-
+// updated successfully.
 export class Update {
   @joiValidation(postSchema)
   public async posts(req: Request, res: Response): Promise<void> {
