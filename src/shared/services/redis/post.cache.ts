@@ -5,7 +5,7 @@ import { ServerError } from "@global/helpers/error-handler";
 import { IPostDocument, ISavePostToCache } from "@post/interfaces/post.interface";
 import { Helpers } from "@global/helpers/helpers";
 import { RedisCommandRawReply } from "@redis/client/dist/lib/commands";
-import { IReactions } from "@reactions/interfaces/reaction.interface";
+import { IReactions } from "@reaction/interfaces/reaction.interface";
 const log: Logger = config.createLogger("postCache");
 
 export type PostCacheMultiType = string | number | Buffer | RedisCommandRawReply[] | IPostDocument | IPostDocument[];
@@ -72,6 +72,7 @@ export class PostCache extends BaseCache {
       const count: number = parseInt(postCount[0], 10) + 1;
       multi.HSET(`users:${currentUserId}`, "postsCount", count);
       multi.exec();
+      console.log("Current User" + currentUserId);
       console.log("post done");
     } catch (error) {
       log.error(error);
@@ -175,7 +176,8 @@ export class PostCache extends BaseCache {
       if (!this.client.isOpen) {
         await this.client.connect();
       }
-      const reply: string[] = await this.client.ZRANGE(key, uId, uId, { REV: true, BY: "SCORE" });
+      const replyDesc: string[] = await this.client.ZRANGE(key, uId, uId);
+      const reply: string[] = replyDesc.reverse();
       const multi: ReturnType<typeof this.client.multi> = this.client.multi();
       for (const value of reply) {
         multi.HGETALL(`posts:${value}`);

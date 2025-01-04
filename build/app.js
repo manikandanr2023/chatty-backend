@@ -17,6 +17,8 @@ class Application {
     }
     loadConfig() {
         config_1.config.validateConfig();
+        //calling CloudinaryCOnfig to run the function
+        config_1.config.cloudinaryConfig();
     }
 }
 const application = new Application();

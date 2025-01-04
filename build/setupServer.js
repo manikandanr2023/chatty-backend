@@ -28,6 +28,8 @@ const config_1 = require("./config");
 const routes_1 = __importDefault(require("./routes"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const error_handler_1 = require("./shared/globals/helpers/error-handler");
+const body_parser_1 = __importDefault(require("body-parser"));
+const post_1 = require("./shared/sockets/post");
 const SERVER_PORT = 5000;
 const log = config_1.config.createLogger("Server");
 class ChattyServer {
@@ -41,6 +43,7 @@ class ChattyServer {
         this.globalErrorHandler(this.app);
         this.startServer(this.app);
         this.apiMonitoring(this.app);
+        console.log("start");
     }
     securityMiddleware(app) {
         app.use((0, cookie_session_1.default)({
@@ -62,6 +65,7 @@ class ChattyServer {
         app.use((0, compression_1.default)());
         app.use((0, express_1.json)({ limit: "50mb" }));
         app.use((0, express_1.urlencoded)({ extended: true, limit: "50mb" }));
+        app.use(body_parser_1.default.urlencoded({ extended: true }));
     }
     routeMiddleware(app) {
         (0, routes_1.default)(app);
@@ -114,7 +118,8 @@ class ChattyServer {
         });
     }
     socketIOConnections(io) {
-        log.info("socketIOConnections");
+        const postSocketHandler = new post_1.SocketIOPostHandler(io);
+        postSocketHandler.listen();
     }
 }
 exports.ChattyServer = ChattyServer;

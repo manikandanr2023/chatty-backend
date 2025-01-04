@@ -12,11 +12,15 @@ import compression from "compression";
 import { config } from "@root/config";
 import applicationRoutes from "@root/routes";
 import HTTP_STATUS from "http-status-codes";
-
 import Logger from "bunyan";
 import { CustomError, IErrorResponse } from "@global/helpers/error-handler";
 import bodyParser from "body-parser";
 import { SocketIOPostHandler } from "@socket/post";
+import { SocketIOFollowersHandler } from "@socket/follower";
+import { SocketIOUserHandler } from "@socket/user";
+import { SocketIONotificationHandler } from "@socket/notification";
+import { SocketIOImageHandler } from "@socket/image";
+import { SocketIOChatHandler } from "@socket/chat";
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger("Server");
@@ -111,6 +115,17 @@ export class ChattyServer {
 
   private socketIOConnections(io: Server): void {
     const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
+    const followerSocketHandler: SocketIOFollowersHandler = new SocketIOFollowersHandler(io);
+    const userSocketHandler: SocketIOUserHandler = new SocketIOUserHandler(io);
+    const notificationSocketHandler: SocketIONotificationHandler = new SocketIONotificationHandler();
+    const imageSocketHandler: SocketIOImageHandler = new SocketIOImageHandler();
+    const chatSocketHandler: SocketIOChatHandler = new SocketIOChatHandler(io);
+
+    chatSocketHandler.listen();
     postSocketHandler.listen();
+    followerSocketHandler.listen();
+    userSocketHandler.listen();
+    notificationSocketHandler.listen(io);
+    imageSocketHandler.listen(io);
   }
 }

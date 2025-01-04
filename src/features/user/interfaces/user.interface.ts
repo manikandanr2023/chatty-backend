@@ -78,6 +78,6 @@ export interface IEmailJob {
   subject: string;
 }
 export interface IAllUsers {
-  users: IUserDocument;
-  totalUser: number;
+  users: IUserDocument[];
+  totalUsers: number;
 }
