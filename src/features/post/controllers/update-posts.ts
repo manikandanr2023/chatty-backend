@@ -11,7 +11,7 @@ import { BadRequestError } from "@global/helpers/error-handler";
 import { uploads, videoUpload } from "@global/helpers/cloudinary-upload";
 
 const postCache: PostCache = new PostCache();
-// updated successfully
+// updated successfully.
 export class Update {
   @joiValidation(postSchema)
   public async posts(req: Request, res: Response): Promise<void> {
