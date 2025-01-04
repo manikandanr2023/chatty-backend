@@ -2,6 +2,33 @@
 @urlPath=api/v1
 
 
+
+###
+POST {{baseUrl}}/{{urlPath}}/post/video/post
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{
+  "post":"",
+  "bgColor":"#ffffff",
+  "privacy":"Public",
+  "gifUrl":"",
+  "profilePicture":"https://res/cloudinary.com/dozszgko7/image/upload/v1726384950/66e68b336718b32799d786e8",
+  "feelings":"",
+  "video":"www.youtube.com/results?search_query=1+min+video"
+}
+
+
+
+
+
+
+
+
+
+
+
 ###
 PUT {{baseUrl}}/{{urlPath}}/post/image/670d747512c84b760cad4767
 Content-Type: application/json
