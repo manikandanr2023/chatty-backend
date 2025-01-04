@@ -89,7 +89,12 @@ export class Create {
     });
     postQueue.addPostJob("addPostToDB", { key: req.currentUser!.userId, value: createdPost });
     //call image queue to add image to mongodb database
-
+    await postCache.savePostToCache({
+      key: postObjectId,
+      currentUserId: `${req.currentUser!.userId}`,
+      uId: `${req.currentUser!.uId}`,
+      createdPost
+    });
     res.status(HTTP_STATUS.CREATED).json({ message: "Post Created with image successfully" });
   }
 
