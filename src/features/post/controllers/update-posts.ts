@@ -89,7 +89,7 @@ export class Update {
     const postUpdated: IPostDocument = await postCache.updatePostInCache(postId, updatedPost);
     socketIOPostObject.emit("update post", postUpdated, "posts");
     postQueue.addPostJob("updatePostInDB", { key: postId, value: postUpdated });
-
+    // fix this issue
     if (image) {
       imageQueue.addImageJob("addImageToDB", {
         key: `${req.currentUser!.userId}`,
