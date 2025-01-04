@@ -9,7 +9,6 @@ import { postQueue } from "@service/queues/post.queue";
 import { UploadApiResponse } from "cloudinary";
 import { BadRequestError } from "@global/helpers/error-handler";
 
-import { uploads } from "@global/helpers/cloudinary-upload";
 
 import { imageQueue } from "@service/queues/image.queue";
 
