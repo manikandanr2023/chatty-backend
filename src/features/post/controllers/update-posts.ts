@@ -8,8 +8,7 @@ import { IPostDocument } from "@post/interfaces/post.interface";
 import { postQueue } from "@service/queues/post.queue";
 import { UploadApiResponse } from "cloudinary";
 import { BadRequestError } from "@global/helpers/error-handler";
-// need to upload
-
+import { uploads, videoUpload } from "@global/helpers/cloudinary-upload";
 const postCache: PostCache = new PostCache();
 // updated successfully.
 export class Update {
