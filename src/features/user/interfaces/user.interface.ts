@@ -27,7 +27,7 @@ export interface IUserDocument extends Document {
 export interface IResetPasswordParams {
   username: string;
   email: string;
-  ipadress: string;
+  ipaddress: string;
   date: string;
 }
 export interface INotificationSettings {
@@ -78,6 +78,6 @@ export interface IEmailJob {
   subject: string;
 }
 export interface IAllUsers {
-  users: IUserDocument;
-  totalUser: number;
+  users: IUserDocument[];
+  totalUsers: number;
 }

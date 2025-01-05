@@ -12,11 +12,17 @@ import compression from "compression";
 import { config } from "@root/config";
 import applicationRoutes from "@root/routes";
 import HTTP_STATUS from "http-status-codes";
-
 import Logger from "bunyan";
 import { CustomError, IErrorResponse } from "@global/helpers/error-handler";
 import bodyParser from "body-parser";
+import { SocketIOPostHandler } from "@socket/post";
+import { SocketIOFollowersHandler } from "@socket/follower";
+import { SocketIOUserHandler } from "@socket/user";
+import { SocketIONotificationHandler } from "@socket/notification";
+import { SocketIOImageHandler } from "@socket/image";
+import { SocketIOChatHandler } from "@socket/chat";
 
+// Server port
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger("Server");
 export class ChattyServer {
@@ -24,13 +30,13 @@ export class ChattyServer {
   constructor(app: Application) {
     this.app = app;
   }
-  public start(app: Application): void {
+  public start(): void {
     this.securityMiddleware(this.app);
     this.standardMiddleware(this.app);
     this.routeMiddleware(this.app);
     this.globalErrorHandler(this.app);
     this.startServer(this.app);
-    this.apiMonitoring(this.app);
+
     console.log("start");
   }
   private securityMiddleware(app: Application): void {
@@ -62,6 +68,7 @@ export class ChattyServer {
   private routeMiddleware(app: Application): void {
     applicationRoutes(app);
   }
+
   private globalErrorHandler(app: Application): void {
     app.all("*", (req: Request, res: Response) => {
       res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found` });
@@ -76,6 +83,9 @@ export class ChattyServer {
   }
 
   private async startServer(app: Application): Promise<void> {
+    if (!config.JWT_TOKEN) {
+      throw new Error("JWT_TOKEN must be provided");
+    }
     try {
       const httpServer: http.Server = new http.Server(app);
       const socketIO: Server = await this.createSocketIO(httpServer);
@@ -85,7 +95,6 @@ export class ChattyServer {
       log.error(error);
     }
   }
-  private apiMonitoring(app: Application): void {}
 
   private async createSocketIO(httpServer: http.Server): Promise<Server> {
     const io: Server = new Server(httpServer, {
@@ -102,6 +111,7 @@ export class ChattyServer {
   }
 
   private startHttpServer(httpServer: http.Server): void {
+    log.info(`Worker with process id of ${process.pid} has started....`);
     log.info(`Server has started with process ${process.pid}`);
     httpServer.listen(SERVER_PORT, () => {
       log.info(`Server running on Port ${SERVER_PORT}`);
@@ -109,6 +119,18 @@ export class ChattyServer {
   }
 
   private socketIOConnections(io: Server): void {
-    log.info("socketIOConnections");
+    const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
+    const followerSocketHandler: SocketIOFollowersHandler = new SocketIOFollowersHandler(io);
+    const userSocketHandler: SocketIOUserHandler = new SocketIOUserHandler(io);
+    const notificationSocketHandler: SocketIONotificationHandler = new SocketIONotificationHandler();
+    const imageSocketHandler: SocketIOImageHandler = new SocketIOImageHandler();
+    const chatSocketHandler: SocketIOChatHandler = new SocketIOChatHandler(io);
+
+    chatSocketHandler.listen();
+    postSocketHandler.listen();
+    followerSocketHandler.listen();
+    userSocketHandler.listen();
+    notificationSocketHandler.listen(io);
+    imageSocketHandler.listen(io);
   }
 }

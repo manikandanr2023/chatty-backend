@@ -7,8 +7,14 @@ import { authService } from "@service/db/auth.service";
 import { BadRequestError } from "@global/helpers/error-handler";
 import { loginSchema } from "@auth/schemes/signin";
 import { IAuthDocument } from "@auth/interfaces/auth.interface";
-import { IUserDocument } from "@user/interfaces/user.interface";
+import { IResetPasswordParams, IUserDocument } from "@user/interfaces/user.interface";
 import { userService } from "@service/db/user.service";
+import { mailTransport } from "@service/emails/mail.transport";
+import { forgotPasswordTemplate } from "@service/emails/templates/forgot-password/forgot-password-templates";
+import { emailQueue } from "@service/queues/email.queue";
+import moment from "moment";
+import publicIP from "ip";
+import { resetPasswordTemplate } from "@service/emails/templates/reset-password/reset-password-template";
 export class SignIn {
   @joiValidation(loginSchema)
   public async read(req: Request, res: Response): Promise<void> {
@@ -23,7 +29,6 @@ export class SignIn {
     }
 
     const user: IUserDocument = await userService.getUserByAuthId(`${existingUser._id}`);
-    console.log(user);
     const userJwt: string = JWT.sign(
       {
         userId: user._id,
@@ -34,11 +39,27 @@ export class SignIn {
       },
       config.JWT_TOKEN!
     );
+    await mailTransport.sendEmail(
+      "angelo1@ethereal.email",
+      "Testing development email",
+      "This is a test email to show theat development email sender works."
+    );
+    const templateParams: IResetPasswordParams = {
+      username: existingUser.username!,
+      email: existingUser.email!,
+      ipaddress: publicIP.address(),
+      date: moment().format("DD/MM/YYYY HH:mm")
+    };
+    const template: string = resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
+    emailQueue.addEmailJob("forgotPasswordEmail", {
+      template,
+      receiverEmail: "angelo1@ethereal.email",
+      subject: "Password reset Confirmation"
+    });
     req.session = { jwt: userJwt };
     const userDocument: IUserDocument = {
       ...user,
       authId: existingUser!._id,
-      
       username: existingUser!.username,
       email: existingUser!.email,
       avatarColor: existingUser!.avatarColor,

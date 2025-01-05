@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 import { CurrentUser } from "@auth/controllers/current-user";
-import { authMiddleware } from "@auth/interfaces/auth-middleware";
+import { authMiddleware } from "@global/helpers/auth-middleware";
 
 class CurrentUserRoutes {
   private router: Router;

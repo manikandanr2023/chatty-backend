@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import JWT from "jsonwebtoken";
 import { config } from "@root/config";
 import { NotAuthorizedError } from "@global/helpers/error-handler";
-import { AuthPayload } from "./auth.interface";
+import { AuthPayload } from "../../../features/auth/interfaces/auth.interface";
 
-export class AuthMiddleware {
+class AuthMiddleware {
   public verifyUser(req: Request, _res: Response, next: NextFunction): void {
     if (!req.session?.jwt) {
       throw new NotAuthorizedError("Token is not available.Please login again.");
