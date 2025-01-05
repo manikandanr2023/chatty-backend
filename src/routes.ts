@@ -12,9 +12,11 @@ import { imageRoutes } from "@image/routes/imageRoutes";
 import { chatRoutes } from "@chat/routes/chatRoutes";
 import { userRoutes } from "@user/routes/userRoutes";
 import { healthRoutes } from "@user/routes/healthRoutes";
+import apiStats from "swagger-stats";
 const BASE_PATH = "/api/v1";
 export default (app: Application) => {
   const routes = () => {
+    app.use("", apiStats.getMiddleware({ uriPath: "/api-monitoring" }));
     app.use("/queues", serverAdapter.getRouter());
 
     app.use("", healthRoutes.health());

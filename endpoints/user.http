@@ -3,6 +3,14 @@
 
 
 ###
+GET {{baseUrl}}/api-monitoring
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{}
+
+###
 GET {{baseUrl}}/{{urlPath}}/user/all/1
 Content-Type: application/json
 Accept: application/json
