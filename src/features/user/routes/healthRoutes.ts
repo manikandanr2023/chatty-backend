@@ -27,9 +27,17 @@ class HealthRoutes {
 
   public instance(): Router {
     this.router.get("/instance", async (req: Request, res: Response) => {
+      const tokenResponse = await axios({
+        method: "PUT",
+        url: "http://169.254.169.254/latest/api/token",
+        headers: { "X-aws-ec2-metadata-token-ttl-seconds": "21600" }, // Token valid for 6 hours
+      });
+      const token = tokenResponse.data;
+      console.log(token);
       const response = await axios({
         method: "get",
-        url: config.EC2_URL
+        url: config.EC2_URL,
+        headers: { "X-aws-ec2-metadata-token": token },
       });
       res
         .status(HTTP_STATUS.OK)
@@ -37,7 +45,6 @@ class HealthRoutes {
     });
     return this.router;
   }
-
   public fiboRoutes(): Router {
     this.router.get("/fibo/:num", async (req: Request, res: Response) => {
       const { num } = req.params;
