@@ -59,7 +59,7 @@ fi
 
 
 cd /home/ec2-user
-git clone -b develop https://github.com/manikandanr2023/chatty-backend.git
+git clone -b staging https://github.com/manikandanr2023/chatty-backend.git
 cd chatty-backend
 
 
@@ -68,9 +68,9 @@ cd chatty-backend
   sudo npm install ip --force
   sudo dnf install -y unzip
 
-aws s3 sync s3://chattyapp-env-file/develop/ .
+aws s3 sync s3://chattyapp-env-file/staging/ .
 sudo -u root unzip env-file.zip
-sudo chmod 644 .env.develop
-sudo cp .env.develop .env
+sudo chmod 644 .env.staging
+sudo cp .env.staging .env
 sudo npm run build
 sudo npm run start
