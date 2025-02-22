@@ -28,3 +28,23 @@ withCredentials:true
 {
 
 }
+
+###
+GET http://api.dev.chatappserver.site/env
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{
+
+}
+
+###
+GET http://api.dev.chatappserver.site/health
+Content-Type: application/json
+Accept: application/json
+withCredentials:true
+
+{
+
+}
