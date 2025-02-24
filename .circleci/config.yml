@@ -129,7 +129,7 @@ jobs:
       - *restore-cache
       - run:
           name: Install prettier
-          command: npm install --save-dev prettier
+          command: npm install --save-dev prettier --force
       - run:
           name: Run prettier check
           command: npm run prettier:check
