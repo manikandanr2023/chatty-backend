@@ -29,7 +29,7 @@ aliases:
   - &install-dependencies
     run:
       name: Install dependencies
-      command: npm install
+      command: npm install --force
   - &save-cache
     save_cache:
       paths:
