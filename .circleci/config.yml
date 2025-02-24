@@ -119,7 +119,7 @@ jobs:
       - *restore-cache
       - run:
           name: Run linting
-          command: npm run prettier:check
+          command: npm run lint:check
       - *notify-on-fail
   "code-formatter-check":
     executor: app-executor
@@ -127,6 +127,9 @@ jobs:
       - checkout
       - *show-current-branch-name
       - *restore-cache
+      - run:
+          name: Install prettier
+          command: npm install --save-dev prettier
       - run:
           name: Run prettier check
           command: npm run prettier:check
