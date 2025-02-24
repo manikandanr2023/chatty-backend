@@ -159,7 +159,7 @@ jobs:
           name: Terraform validate & format
           command: |
             cd deployment/
-            terraform init -backend-false
+            terraform init
             terraform validate
             terraform fmt
       - *notify-on-fail
