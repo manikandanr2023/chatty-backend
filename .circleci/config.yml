@@ -161,8 +161,7 @@ jobs:
             cd deployment/
             terraform init -backend=false
             terraform validate
-
-      - *notify-on-fail
+            terraform fmt
   "terraform-plan-and-apply":
     executor: terraform-executor
     steps:
