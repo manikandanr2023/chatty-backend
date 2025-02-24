@@ -57,7 +57,7 @@ describe("SignUp", () => {
     const req: Request = authMockRequest(
       {},
       {
-        username: "mathematics",
+        username: "mathematicsmathematicmathematics",
         email: "manny@test.com",
         password: "qwerty",
         avatarColor: "red",

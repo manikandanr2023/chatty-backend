@@ -1,5 +1,5 @@
-@baseUrl = https://api.dev.chatappserver.site
-@urlPath=api/v1
+@baseUrl = http://localhost:5000
+@urlPath = api/v1
 
 ###
 POST {{baseUrl}}/{{urlPath}}/signup
