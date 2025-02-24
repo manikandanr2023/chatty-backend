@@ -50,22 +50,22 @@ describe("Update", () => {
         message: "Message marked as read"
       });
     });
-      it("should call chatQueue addChatJob", async () => {
-        const req: Request = chatMockRequest(
-          {},
-          { senderId: `${existingUser._id}`, receiverId: "60263f14648fed5246e322d8" },
-          authUserPayload
-        ) as Request;
-        const res: Response = chatMockResponse();
-        jest.spyOn(MessageCache.prototype, "updateChatMessages").mockResolvedValue(messageDataMock);
-        jest.spyOn(chatQueue, "addChatJob");
+    it("should call chatQueue addChatJob", async () => {
+      const req: Request = chatMockRequest(
+        {},
+        { senderId: `${existingUser._id}`, receiverId: "60263f14648fed5246e322d8" },
+        authUserPayload
+      ) as Request;
+      const res: Response = chatMockResponse();
+      jest.spyOn(MessageCache.prototype, "updateChatMessages").mockResolvedValue(messageDataMock);
+      jest.spyOn(chatQueue, "addChatJob");
 
-        await Update.prototype.message(req, res);
-        expect(chatQueue.addChatJob).toHaveBeenCalled();
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith({
-          message: "Message marked as read"
-        });
+      await Update.prototype.message(req, res);
+      expect(chatQueue.addChatJob).toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Message marked as read"
+      });
     });
   });
 });

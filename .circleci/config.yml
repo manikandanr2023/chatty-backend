@@ -131,6 +131,9 @@ jobs:
           name: Install prettier
           command: npm install --save-dev prettier --force
       - run:
+          name: Run prettier Fix
+          command: npm run prettier:fix
+      - run:
           name: Run prettier check
           command: npm run prettier:check
       - *notify-on-fail
