@@ -40,7 +40,7 @@ resource "aws_codedeploy_deployment_group" "code_deploy_app_group" {
 
   provisioner "local-exec" {
 
-    command    = "bash userdata/delete-asg.sh"
+    command    = "/bin/sh userdata/delete-asg.sh"
     when       = destroy
     on_failure = continue
 

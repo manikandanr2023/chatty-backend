@@ -162,6 +162,7 @@ jobs:
             terraform init -backend=false
             terraform validate
             terraform fmt
+
   "terraform-plan-and-apply":
     executor: terraform-executor
     steps:

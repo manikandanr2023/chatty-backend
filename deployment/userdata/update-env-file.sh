@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 echo "update env file"
 aws s3 sync s3://chattyapp-env-file/develop/ .
 unzip env-file.zip
