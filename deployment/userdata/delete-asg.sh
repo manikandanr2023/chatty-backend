@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 
 ASG=$(aws autoscaling describe-auto-scaling-groups --no-paginate --output text \
