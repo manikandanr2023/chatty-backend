@@ -33,7 +33,7 @@ sudo ./install auto
 
 if [ $(program_is_installed node) -eq 0 ];then
 sudo yum install -y curl gcc-c++ make
-curl -sL https://rpm.nodesource.com/setup_current.x | sudo bash -
+curl -sL https://rpm.nodesource.com/setup_current.x | sudo sh -
 sudo yum install -y nodejs
 if [ -f ~/.bashrc ]; then
     PROFILE=~/.bashrc

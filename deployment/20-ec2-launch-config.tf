@@ -13,8 +13,8 @@ resource "aws_launch_template" "asg_launch" {
   block_device_mappings {
     device_name = "/dev/xvda"
     ebs {
-      volume_size           = 10 # Increase root volume from 2GB to 10GB (or more)
-      volume_type           = "gp3"
+      volume_size           = 30 # Increase root volume from 2GB to 10GB (or more)
+      volume_type           = "gp2"
       delete_on_termination = true
     }
   }

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 cd /home/ec2-user/chatty-backend
 sudo rm -rf env-file.zip
 sudo rm -rf .env
