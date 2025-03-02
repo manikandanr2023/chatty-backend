@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "code_deploy_backend_bucket" {
-  bucket        = "${local.prefix}-app"
+  bucket        = "${local.prefix}-bucket-app"
   force_destroy = true
   tags          = local.common_tags
 }
