@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "user data"
 function program_is_installed {

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DIR = "/home/ec2-user/chatty-backend"
 if [ -d "$DIR" ]; then

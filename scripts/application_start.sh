@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 cd /home/ec2-user/chatty-backend
 sudo npm run build
 sudo npm start > /var/log/application.log 2>&1 &
