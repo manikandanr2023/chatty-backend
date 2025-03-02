@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "update env file"
-
+echo zip --version
 aws s3 sync s3://chattyapp-env-file/develop/ .
 unzip env-file.zip
 cp .env.develop .env
@@ -16,3 +16,4 @@ aws --region us-east-1 s3 cp env-file.zip s3://chattyapp-env-file/develop/
 
 rm -rf .env*
 rm -rf env-file.zip
+echo zip --version
