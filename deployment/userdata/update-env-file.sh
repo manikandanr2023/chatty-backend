@@ -1,6 +1,6 @@
 #!/bin/sh
-yum install -y zip
-apt-get install zip
+
+
 echo "update env file"
 aws s3 sync s3://chattyapp-env-file/develop/ .
 unzip env-file.zip
@@ -9,9 +9,8 @@ rm .env.develop
 sed -i -e "s|\(^REDIS_HOST=\).*|REDIS_HOST=redis://$ELASTICACHE_ENDPOINT:6379|g" .env
 rm -rf env-file.zip
 cp .env .env.develop
-zip -r env-file.zip .env.develop
-tar -czf myfolder.tar.gz .env.develop
-aws --region us-east-1 s3 cp env-file.zip s3://chattyapp-env-file/develop/
+tar -czf env-file.tar.gz .env.develop
+aws --region us-east-1 s3 cp env-file.tar.gz s3://chattyapp-env-file/develop/
 rm -rf .env*
-rm -rf env-file.zip
-zip --version
+rm -rf env-file.tar.gz
+echo "success"
