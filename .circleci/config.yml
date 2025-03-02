@@ -199,7 +199,7 @@ jobs:
       - run:
           name: Upload project to s3
           command: |
-            aws --region us-east-1 s3 cp chatapp.zip s3://chatapp-server-${CIRCLE_BRANCH}-app
+            aws --region us-east-1 s3 cp chatapp.zip s3://chatapp-server-${CIRCLE_BRANCH}-bucket-app
   "push-to-aws-code-deploy":
     executor: aws-cli/default
     steps:
