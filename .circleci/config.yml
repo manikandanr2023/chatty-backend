@@ -185,9 +185,8 @@ jobs:
           command: |
             cd deployment/
             terraform workspace select ${CIRCLE_BRANCH}
-            terraform destroy -auto-approve
             terraform apply -auto-approve
-      - *notify-on-fail
+
   "upload-project-to-s3":
     executor: aws-cli/default
     steps:
@@ -201,7 +200,6 @@ jobs:
           name: Upload project to s3
           command: |
             aws --region us-east-1 s3 cp chatapp.zip s3://chatapp-server-${CIRCLE_BRANCH}-app
-      - *notify-on-fail
   "push-to-aws-code-deploy":
     executor: aws-cli/default
     steps:
@@ -223,7 +221,6 @@ jobs:
                   --file-exists-behavior "OVERWRITE" \
                   --s3-location bucket=chatapp-server-${CIRCLE_BRANCH}-app,bundleType=zip,key=chatapp.zip
             fi
-      - *notify-on-fail
   "notify-via-slack":
     executor: slack-executor
     steps:
