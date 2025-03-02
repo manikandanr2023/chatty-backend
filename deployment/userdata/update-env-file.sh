@@ -1,4 +1,6 @@
 #!/bin/sh
+sudo dnf update -y
+sudo dnf install -y zip
 echo "update env file"
 aws s3 sync s3://chattyapp-env-file/develop/ .
 unzip env-file.zip
