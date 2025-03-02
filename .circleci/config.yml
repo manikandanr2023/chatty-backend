@@ -185,6 +185,7 @@ jobs:
           command: |
             cd deployment/
             terraform workspace select ${CIRCLE_BRANCH}
+            terraform destroy -auto-approve
             terraform apply -auto-approve
 
   "upload-project-to-s3":
