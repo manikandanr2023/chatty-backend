@@ -69,8 +69,19 @@ cd chatty-backend
   sudo dnf install -y unzip
 
 aws s3 sync s3://chattyapp-env-file/develop/ .
-sudo -u root unzip env-file.zip
+# sudo -u root unzip env-file.zip
+# sudo chmod 644 .env.develop
+# sudo cp .env.develop .env
+
+if [ -f env-file.tar.gz ]; then
+   sudo -u root tar -xzf env-file.tar.gz
+   echo "first"
+else
+    echo "Error: No valid archive found!"
+
+fi
 sudo chmod 644 .env.develop
 sudo cp .env.develop .env
+
 sudo npm run build
 sudo npm run start

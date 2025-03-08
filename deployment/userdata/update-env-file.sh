@@ -1,16 +1,21 @@
 #!/bin/sh
 
-
-echo "update env file"
+echo "Updating env file..."
 aws s3 sync s3://chattyapp-env-file/develop/ .
-unzip env-file.zip
+if [ -f env-file.tar.gz ]; then
+    tar -xzf env-file.tar.gz
+    echo "first"
+else
+    echo "Error: No valid archive found!"
+
+fi
 cp .env.develop .env
 rm .env.develop
-sed -i -e "s|\(^REDIS_HOST=\).*|REDIS_HOST=redis://$ELASTICACHE_ENDPOINT:6379|g" .env
-rm -rf env-file.zip
+sed -i -e "s|^REDIS_HOST=.*|REDIS_HOST=redis://$ELASTICACHE_ENDPOINT:6379|g" .env
+rm -rf env-file.tar.gz
 cp .env .env.develop
 tar -czf env-file.tar.gz .env.develop
 aws --region us-east-1 s3 cp env-file.tar.gz s3://chattyapp-env-file/develop/
-rm -rf .env*
-rm -rf env-file.tar.gz
-echo "success"
+rm -rf .env .env.develop env-file.tar.gz
+
+echo "Environment file updated and uploaded successfully."
