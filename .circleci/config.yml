@@ -185,7 +185,6 @@ jobs:
           command: |
             cd deployment/
             terraform workspace select ${CIRCLE_BRANCH}
-            terraform destroy -auto-approve
             terraform apply -auto-approve
 
 
@@ -213,16 +212,14 @@ jobs:
       - run:
           name: Deploy changes with AWS code deploy
           command: |
-            if [ "${CODE_DEPLOY_UPDATE}" == "true"]
-            then
-              aws deploy create-deployment \
+                  aws deploy create-deployment \
                   --region us-east-1 \
                   --application-name chatapp-server-${CIRCLE_BRANCH}-app \
                   --deployment-config-name CodeDeployDefault.AllAtOnce \
                   --deployment-group-name chatapp-server-${CIRCLE_BRANCH}-group \
                   --file-exists-behavior "OVERWRITE" \
                   --s3-location bucket=chatapp-server-${CIRCLE_BRANCH}-bucket-app,bundleType=zip,key=chatapp.zip
-            fi
+
   "notify-via-slack":
     executor: slack-executor
     steps:
