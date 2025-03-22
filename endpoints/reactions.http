@@ -1,0 +1,67 @@
+@baseUrl=http://localhost:5000
+@urlPath=api/v1
+
+###
+POST {{baseUrl}}/{{urlPath}}/post/reaction
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "userTo":"671e77be71b167afeef478b8",
+  "postId":"671e75c2a41be93f8b1f2076",
+  "type":"sad",
+  "previousReaction":"happy",
+  "postReactions":{"like":0,"love":0,"happy":0,"sad":1,"wow":0,"angry":0},
+  "profilePicture": "https://res/cloudinary.com/dozszgko7/image/upload/v1726384950/66e68b336718b32799d786e8"
+}
+
+###
+DELETE {{baseUrl}}/{{urlPath}}/post/reaction/671d03e05d469110f7ac536b/sad/{"like":0,"love":0,"happy":0,"sad":0,"wow":0,"angry":0}
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+
+}
+
+###
+GET  {{baseUrl}}/{{urlPath}}/post/reactions/671e75c2a41be93f8b1f2076
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+
+}
+
+###
+GET  {{baseUrl}}/{{urlPath}}/post/reactions/671e75c2a41be93f8b1f2076
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+
+}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/single/reaction/username/Ma12101/671e75c2a41be93f8b1f2076
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+
+}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/reactions/username/Ma121110
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+
+}

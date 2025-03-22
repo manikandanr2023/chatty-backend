@@ -1,0 +1,7 @@
+aws deploy create-deployment \
+     --region us-east-1 \
+     --application-name chatapp-server-develop-app \
+     --deployment-config-name CodeDeployDefault.AllAtOnce \
+     --deployment-group-name chatapp-server-develop-group \
+     --file-exists-behavior "OVERWRITE" \
+     --s3-location bucket=chatapp-server-develop-bucket-app,bundleType=zip,key=chatapp.zip
